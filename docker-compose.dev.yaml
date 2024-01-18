@@ -1,0 +1,7 @@
+# docker compose -f docker-compose.yaml -f docker-compose.dev.yaml [build|up]
+
+version: '3'
+
+services:
+  enent-saver:
+    build: ../EventSaver
