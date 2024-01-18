@@ -28,7 +28,7 @@ services:
 
   enent-saver:
     container_name: enent-saver
-    image: ghcr.io/wot-stat/event-saver:latest
+    image: ghcr.io/wot-stat/eventsaver:main
     restart: always
     ports:
      - "9000:9000"
@@ -39,9 +39,9 @@ services:
       - PORT=9000
       - CLICKHOUSE_HOST=http://clickhouse:8123
       - REDIS_HOST=redis
-      - CLICKHOUSE_USER=default
-      - CLICKHOUSE_PASSWORD=
       - CLICKHOUSE_DATABASE=WOT
-      - JWT_SECRET=JWT_SECRET
+      - CLICKHOUSE_USER
+      - CLICKHOUSE_PASSWORD
+      - JWT_SECRET
       - DEBUG=1
 
