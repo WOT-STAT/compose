@@ -13,7 +13,7 @@ services:
       - ../clickhouse/data:/var/lib/clickhouse
       - ../clickhouse/log:/var/log/clickhouse-server
       - ./clickhouse/config/config.d:/etc/clickhouse-server/config.d
-      # - ./clickhouse/users.d:/etc/clickhouse-server/users.d
+      - ./clickhouse/users.d:/etc/clickhouse-server/users.d
       - ./clickhouse/init:/docker-entrypoint-initdb.d
     ports:
       - '9001:8123'
