@@ -15,6 +15,7 @@ services:
       - ./clickhouse/config/config.d:/etc/clickhouse-server/config.d
       - ./clickhouse/config/users.d:/etc/clickhouse-server/users.d
       - ./clickhouse/init:/docker-entrypoint-initdb.d
+    restart: always
     ports:
       - '9001:8123'
     ulimits:
@@ -26,8 +27,7 @@ services:
   redis:
     container_name: redis
     image: 'redis:alpine'
-    ports:
-      - '6379:6379'
+    restart: always
 
   enent-saver:
     container_name: enent-saver
