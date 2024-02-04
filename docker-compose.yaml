@@ -18,6 +18,7 @@ services:
     restart: always
     ports:
       - '9001:8123'
+      - '9080:80'
     ulimits:
       nproc: 65535
       nofile:
