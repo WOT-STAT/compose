@@ -9,7 +9,7 @@ on:
         type: choice
         description: 'Select environment to deploy'
         required: true
-        default: all
+        default: dev
         options:
           - all
           - dev
