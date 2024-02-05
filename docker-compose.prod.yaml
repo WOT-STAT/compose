@@ -26,5 +26,6 @@ services:
      - "9000:9000"
     environment:
       - DEBUG=1
+      - ASYNC_INSERT=1
 
 
