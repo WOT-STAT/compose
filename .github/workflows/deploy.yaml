@@ -4,16 +4,16 @@ on:
   push:
     branches: [main]
   workflow_dispatch:
-    # inputs:
-    #   dependencies:
-    #     type: choice
-    #     description: 'What to do with **dependencies**'
-    #     required: true
-    #     default: install
-    #     options:
-    #       - install
-    #       - update
-    #       - nothing
+    inputs:
+      dependencies:
+        type: choice
+        description: 'Select environment to deploy'
+        required: true
+        default: all
+        options:
+          - all
+          - dev
+          - prod
 
 # concurrency: staging
 
@@ -51,5 +51,14 @@ jobs:
       - name: Copy to server
         run: rsync -avz ./ node:/${{ vars.APP_PATH }}
 
-      - name: Startup docker-compose
-        run: ssh node "cd ${{ vars.APP_PATH }}; bash rerun.sh"
+      - name: Startup docker-compose ALL
+        if: ${{ github.event.inputs.option == 'all' || github.event_name == 'push' }}
+        run: ssh node "cd ${{ vars.APP_PATH }}; bash rerun-dev.sh && bash rerun-prod.sh"
+
+      - name: Startup docker-compose DEV
+        if: ${{ github.event.inputs.option == 'dev' }}
+        run: ssh node "cd ${{ vars.APP_PATH }}; bash rerun-dev.sh"
+
+      - name: Startup docker-compose PROD
+        if: ${{ github.event.inputs.option == 'prod' }}
+        run: ssh node "cd ${{ vars.APP_PATH }}; bash rerun-prod.sh"
