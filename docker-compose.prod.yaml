@@ -1,0 +1,30 @@
+# docker compose -p prod -f docker-compose.yaml -f docker-compose.prod.yaml up;
+ 
+version: '3.7'
+
+services:
+  clickhouse:
+    container_name: clickhouse-prod
+    volumes:
+      - ../clickhouse/data:/var/lib/clickhouse
+      - ../clickhouse/log:/var/log/clickhouse-server
+    ports:
+      - '9001:8123'
+
+  clickhouse-backup:
+    container_name: clickhouse-backup-prod
+    command: ["/bin/bash", "/start.sh"]
+    environment:
+      - WATCH_BACKUP_NAME_TEMPLATE=prod-{type}-{time:2006-01-02T15-04-05}
+
+  redis:
+    container_name: redis-prod
+
+  enent-saver:
+    container_name: enent-saver-prod
+    ports:
+     - "9000:9000"
+    environment:
+      - DEBUG=1
+
+

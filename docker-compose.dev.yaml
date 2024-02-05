@@ -1,0 +1,28 @@
+# docker compose -p dev -f docker-compose.yaml -f docker-compose.dev.yaml up;
+ 
+version: '3.7'
+
+services:
+  clickhouse:
+    container_name: clickhouse-dev
+    volumes:
+      - ../clickhouse-dev/data:/var/lib/clickhouse
+      - ../clickhouse-dev/log:/var/log/clickhouse-server
+    ports:
+      - '8001:8123'
+
+  clickhouse-backup:
+    container_name: clickhouse-backup-dev
+    command: ["sleep", "infinity"]
+    environment:
+      - WATCH_BACKUP_NAME_TEMPLATE=dev-{type}-{time:2006-01-02T15-04-05}
+
+  redis:
+    container_name: redis-dev
+
+  enent-saver:
+    container_name: enent-saver-dev
+    ports:
+     - "8000:9000"
+    environment:
+      - DEBUG=1

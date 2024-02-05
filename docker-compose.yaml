@@ -11,13 +11,9 @@ services:
       - CLICKHOUSE_USER=${CLICKHOUSE_USER}
       - CLICKHOUSE_PASSWORD=${CLICKHOUSE_PASSWORD}
     volumes:
-      - ../clickhouse/data:/var/lib/clickhouse
-      - ../clickhouse/log:/var/log/clickhouse-server
       - ./clickhouse/config/config.d:/etc/clickhouse-server/config.d
       - ./clickhouse/config/users.d:/etc/clickhouse-server/users.d
       - ./clickhouse/init:/docker-entrypoint-initdb.d
-    ports:
-      - '9001:8123'
     ulimits:
       nproc: 65535
       nofile:
@@ -46,8 +42,6 @@ services:
       - API_LISTEN=0.0.0.0:7171
       - WATCH_INTERVAL=24h
       - FULL_INTERVAL=168h
-      - WATCH_BACKUP_NAME_TEMPLATE={type}-{time:2006-01-02T15-04-05}
-    command: ["/bin/bash", "/start.sh"]
 
   redis:
     container_name: redis
@@ -58,8 +52,6 @@ services:
     container_name: enent-saver
     image: ghcr.io/wot-stat/eventsaver:main
     restart: always
-    ports:
-     - "9000:9000"
     depends_on:
       - clickhouse
       - redis
@@ -71,5 +63,8 @@ services:
       - CLICKHOUSE_PASSWORD
       - REDIS_HOST=redis
       - JWT_SECRET
-      - DEBUG=1
 
+# networks:
+#   bridge-network:
+#     name: bridge-network
+#     driver: bridge

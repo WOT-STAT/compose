@@ -51,16 +51,5 @@ jobs:
       - name: Copy to server
         run: rsync -avz ./ node:/${{ vars.APP_PATH }}
 
-      # - name: Install Dependencies
-      #   if: github.event.inputs.dependencies == 'install'
-      #   run: ssh node "cd ${{ vars.APP_PATH }}; bash deps.install.sh"
-
-      # - name: Update Dependencies
-      #   if: github.event.inputs.dependencies == 'update'
-      #   run: ssh node "cd ${{ vars.APP_PATH }}; bash deps.update.sh"
-
-      # - name: Authorize in ghcr.io with PAT
-      #   run: ssh node "docker login ghcr.io -u ${{ secrets.GHCR_PAT_USER }} -p ${{ secrets.GHCR_PAT }}"
-
       - name: Startup docker-compose
         run: ssh node "cd ${{ vars.APP_PATH }}; bash rerun.sh"
