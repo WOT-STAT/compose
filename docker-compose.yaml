@@ -6,6 +6,7 @@ services:
   clickhouse:
     container_name: clickhouse
     image: clickhouse/clickhouse-server:23.8.9-alpine
+    restart: always
     environment:
       - CLICKHOUSE_USER=${CLICKHOUSE_USER}
       - CLICKHOUSE_PASSWORD=${CLICKHOUSE_PASSWORD}
@@ -15,7 +16,6 @@ services:
       - ./clickhouse/config/config.d:/etc/clickhouse-server/config.d
       - ./clickhouse/config/users.d:/etc/clickhouse-server/users.d
       - ./clickhouse/init:/docker-entrypoint-initdb.d
-    restart: always
     ports:
       - '9001:8123'
     ulimits:
@@ -23,6 +23,31 @@ services:
       nofile:
         soft: 262144
         hard: 262144
+
+  clickhouse-backup:
+    image: altinity/clickhouse-backup:latest
+    restart: always
+    volumes_from:
+      - clickhouse
+    volumes:
+      - ./clickhouse-backup/start.sh:/start.sh
+    depends_on:
+      - clickhouse
+    environment:
+      - CLICKHOUSE_HOST=clickhouse
+      - CLICKHOUSE_USERNAME=${CLICKHOUSE_USER}
+      - CLICKHOUSE_PASSWORD=${CLICKHOUSE_PASSWORD}
+      - S3_BUCKET=wotstat-backup
+      - S3_ENDPOINT=https://storage.yandexcloud.net
+      - S3_REGION=ru-central1
+      - S3_ACCESS_KEY
+      - S3_SECRET_KEY
+      - REMOTE_STORAGE=s3
+      - API_LISTEN=0.0.0.0:7171
+      - WATCH_INTERVAL=24h
+      - FULL_INTERVAL=168h
+      - WATCH_BACKUP_NAME_TEMPLATE={type}-{time:2006-01-02T15-04-05}
+    command: ["/bin/bash", "/start.sh"]
 
   redis:
     container_name: redis
@@ -41,10 +66,10 @@ services:
     environment:
       - PORT=9000
       - CLICKHOUSE_HOST=http://clickhouse:8123
-      - REDIS_HOST=redis
       - CLICKHOUSE_DATABASE=WOT
       - CLICKHOUSE_USER
       - CLICKHOUSE_PASSWORD
+      - REDIS_HOST=redis
       - JWT_SECRET
       - DEBUG=1
 

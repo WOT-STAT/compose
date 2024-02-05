@@ -12,9 +12,9 @@ CREATE USER if not exists public IDENTIFIED WITH no_password
 
 CREATE QUOTA if not exists public
   KEYED BY ip_address
-    FOR RANDOMIZED INTERVAL 1 MINUTE MAX queries = 240, result_rows = 100000, execution_time = 600,
+    FOR RANDOMIZED INTERVAL 1 MINUTE MAX queries = 240, result_rows = 100000, execution_time = 20,
     FOR RANDOMIZED INTERVAL 1 HOUR MAX queries = 2000, result_rows = '2M', execution_time = 600,
-    FOR RANDOMIZED INTERVAL 1 DAY MAX queries = 5000, result_rows = '10M', execution_time = 600
+    FOR RANDOMIZED INTERVAL 1 DAY MAX queries = 5000, result_rows = '10M', execution_time = 2000
 TO public;
 
 GRANT SELECT ON WOT.* TO public;
