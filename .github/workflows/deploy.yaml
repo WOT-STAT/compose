@@ -5,7 +5,7 @@ on:
     branches: [main]
   workflow_dispatch:
     inputs:
-      dependencies:
+      deployment_option:
         type: choice
         description: 'Select environment to deploy'
         required: true
@@ -52,13 +52,13 @@ jobs:
         run: rsync -avz ./ node:/${{ vars.APP_PATH }}
 
       - name: Startup docker-compose ALL
-        if: ${{ github.event.inputs.option == 'all' || github.event_name == 'push' }}
+        if: ${{ github.event.inputs.deployment_option == 'all' || github.event_name == 'push' }}
         run: ssh node "cd ${{ vars.APP_PATH }}; bash rerun-dev.sh && bash rerun-prod.sh"
 
       - name: Startup docker-compose DEV
-        if: ${{ github.event.inputs.option == 'dev' }}
+        if: ${{ github.event.inputs.deployment_option == 'dev' }}
         run: ssh node "cd ${{ vars.APP_PATH }}; bash rerun-dev.sh"
 
       - name: Startup docker-compose PROD
-        if: ${{ github.event.inputs.option == 'prod' }}
+        if: ${{ github.event.inputs.deployment_option == 'prod' }}
         run: ssh node "cd ${{ vars.APP_PATH }}; bash rerun-prod.sh"
