@@ -50,7 +50,6 @@ services:
 
   enent-saver:
     container_name: enent-saver
-    image: ghcr.io/wot-stat/eventsaver:main
     restart: always
     depends_on:
       - clickhouse

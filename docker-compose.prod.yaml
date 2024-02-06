@@ -22,6 +22,7 @@ services:
 
   enent-saver:
     container_name: enent-saver-prod
+    image: ghcr.io/wot-stat/eventsaver:main
     ports:
      - "9000:9000"
     environment:
