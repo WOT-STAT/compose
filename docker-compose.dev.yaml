@@ -8,8 +8,8 @@ services:
     volumes:
       - ../clickhouse-dev/data:/var/lib/clickhouse
       - ../clickhouse-dev/log:/var/log/clickhouse-server
-    ports:
-      - '8001:8123'
+    # ports:
+    #   - '8001:8123'
 
   clickhouse-backup:
     container_name: clickhouse-backup-dev
@@ -27,3 +27,12 @@ services:
      - "8000:9000"
     environment:
       - DEBUG=1
+
+  nginx-proxy:
+    container_name: nginx-proxy-dev
+    image: openresty/openresty:alpine
+    ports:
+      - "8001:80"
+    volumes:
+      - ./nginx/nginx.conf:/usr/local/openresty/nginx/conf/nginx.conf:ro
+      - ./nginx/lua-scripts:/etc/nginx/lua-scripts:ro
