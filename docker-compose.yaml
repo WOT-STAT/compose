@@ -63,7 +63,10 @@ services:
       - REDIS_HOST=redis
       - JWT_SECRET
 
-# networks:
-#   bridge-network:
-#     name: bridge-network
-#     driver: bridge
+  nginx-proxy:
+    container_name: nginx-proxy
+    image: openresty/openresty:alpine
+    volumes:
+      - ./nginx/nginx.conf:/usr/local/openresty/nginx/conf/nginx.conf:ro
+      - ./nginx/lua-scripts:/etc/nginx/lua-scripts:ro
+

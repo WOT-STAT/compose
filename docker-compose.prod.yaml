@@ -8,8 +8,6 @@ services:
     volumes:
       - ../clickhouse/data:/var/lib/clickhouse
       - ../clickhouse/log:/var/log/clickhouse-server
-    ports:
-      - '9001:8123'
 
   clickhouse-backup:
     container_name: clickhouse-backup-prod
@@ -28,5 +26,10 @@ services:
     environment:
       - DEBUG=1
       - ASYNC_INSERT=1
+
+  nginx-proxy:
+    container_name: nginx-proxy-prod
+    ports:
+      - "9001:80"
 
 
