@@ -16,6 +16,7 @@ services:
     command: ["/bin/bash", "/start.sh"]
     environment:
       - WATCH_BACKUP_NAME_TEMPLATE=prod-{type}-{time:2006-01-02T15-04-05}
+      - LOG_LEVEL=warn
 
   redis:
     container_name: redis-prod
