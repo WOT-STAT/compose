@@ -71,14 +71,14 @@ services:
 
   loki:
     container_name: loki
-    image: grafana/loki:latest
+    image: grafana/loki:2.9.4
     command: -config.file=/etc/loki/loki-config.yaml
     volumes:
       - ./loki/loki-local.yaml:/etc/loki/loki-config.yaml
 
   grafana:
     container_name: grafana
-    image: grafana/grafana:latest
+    image: grafana/grafana:10.3.3
     volumes:
       - ./grafana/provisioning:/etc/grafana/provisioning/
     environment:
