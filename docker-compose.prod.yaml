@@ -36,6 +36,8 @@ services:
   loki:
     container_name: loki-prod
     logging: *loki-logging-prod
+    volumes:
+      - ../loki-data:/tmp/loki
     ports:
       - "9002:3100"
 

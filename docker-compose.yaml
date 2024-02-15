@@ -75,7 +75,6 @@ services:
     command: -config.file=/etc/loki/loki-config.yaml
     volumes:
       - ./loki/loki-local.yaml:/etc/loki/loki-config.yaml
-      - ../loki-data:/tmp/loki
 
   grafana:
     container_name: grafana
