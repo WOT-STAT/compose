@@ -1,5 +1,10 @@
 # docker compose down; docker compose up --remove-orphans;
 
+# 9000 – enent-saver
+# 9001 – clickhouse
+# 9002 – loki
+# 9003 – grafana
+
 version: '3.7'
 
 services:
@@ -63,3 +68,19 @@ services:
       - CLICKHOUSE_PASSWORD
       - REDIS_HOST=redis
       - JWT_SECRET
+
+  loki:
+    container_name: loki
+    image: grafana/loki:latest
+    command: -config.file=/etc/loki/loki-config.yaml
+    volumes:
+      - ./loki/loki-local.yaml:/etc/loki/loki-config.yaml
+      - ../loki-data:/tmp/loki
+
+  grafana:
+    container_name: grafana
+    image: grafana/grafana:latest
+    volumes:
+      - ./grafana/provisioning:/etc/grafana/provisioning/
+    environment:
+      - GF_SECURITY_ADMIN_PASSWORD

@@ -2,9 +2,20 @@
  
 version: '3.7'
 
+x-logging: &loki-logging-prod
+  driver: loki
+  options:
+    loki-url: "http://localhost:9002/loki/api/v1/push"
+    loki-retries: 2
+    loki-timeout: 1s
+    loki-max-backoff: 800ms
+    max-size: "10m"
+    max-file: "3"
+
 services:
   clickhouse:
     container_name: clickhouse-prod
+    logging: *loki-logging-prod
     volumes:
       - ../clickhouse/data:/var/lib/clickhouse
       - ../clickhouse/log:/var/log/clickhouse-server
@@ -20,9 +31,23 @@ services:
 
   redis:
     container_name: redis-prod
+    logging: *loki-logging-prod
+
+  loki:
+    container_name: loki-prod
+    logging: *loki-logging-prod
+    ports:
+      - "9002:3100"
+
+  grafana:
+    container_name: grafana
+    logging: *loki-logging-prod
+    ports:
+      - "9003:3000"
 
   enent-saver:
     container_name: enent-saver-prod
+    logging: *loki-logging-prod
     image: ghcr.io/wot-stat/eventsaver:main
     ports:
      - "9000:9000"
