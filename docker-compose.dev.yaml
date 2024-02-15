@@ -34,7 +34,7 @@ services:
     logging: *loki-logging-dev
 
   loki:
-    container_name: loki-prod
+    container_name: loki-dev
     logging: *loki-logging-dev
     ports:
       - "8002:3100"
