@@ -40,7 +40,7 @@ services:
       - "8002:3100"
 
   grafana:
-    container_name: grafana
+    container_name: grafana-dev
     logging: *loki-logging-dev
     ports:
       - "8003:3000"

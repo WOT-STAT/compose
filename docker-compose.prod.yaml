@@ -40,7 +40,7 @@ services:
       - "9002:3100"
 
   grafana:
-    container_name: grafana
+    container_name: grafana-prod
     logging: *loki-logging-prod
     ports:
       - "9003:3000"
