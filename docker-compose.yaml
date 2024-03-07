@@ -68,6 +68,7 @@ services:
       - CLICKHOUSE_PASSWORD
       - REDIS_HOST=redis
       - JWT_SECRET
+      - WG_API_KEY
 
   loki:
     container_name: loki
