@@ -1,0 +1,41 @@
+# docker compose down; docker compose up -p loki -f docker-compose-loki-only.yaml --remove-orphans;
+
+# 9002 – loki
+# 9003 – grafana
+
+version: '3.7'
+
+x-logging: &loki-logging-prod
+  driver: loki
+  options:
+    loki-url: "http://localhost:9002/loki/api/v1/push"
+    loki-retries: 2
+    loki-timeout: 1s
+    loki-max-backoff: 800ms
+    max-size: "10m"
+    max-file: "3"
+
+services:
+  loki:
+    container_name: loki
+    restart: always
+    logging: *loki-logging-prod
+    image: grafana/loki:2.9.4
+    command: -config.file=/etc/loki/loki-config.yaml
+    volumes:
+      - ./loki/loki-local.yaml:/etc/loki/loki-config.yaml
+      - ../loki-data:/tmp/loki
+    ports:
+      - "9002:3100"
+
+  grafana:
+    container_name: grafana
+    restart: always
+    logging: *loki-logging-prod
+    image: grafana/grafana:10.3.3
+    volumes:
+      - ./grafana/provisioning:/etc/grafana/provisioning/
+    environment:
+      - GF_SECURITY_ADMIN_PASSWORD
+    ports:
+      - "9003:3000"
