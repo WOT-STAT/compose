@@ -19,6 +19,7 @@ services:
       - ./clickhouse/config/config.d:/etc/clickhouse-server/config.d
       - ./clickhouse/config/users.d:/etc/clickhouse-server/users.d
       - ./clickhouse/init:/docker-entrypoint-initdb.d
+      - ./clickhouse/benchmark:/benchmark
     ulimits:
       nproc: 65535
       nofile:
