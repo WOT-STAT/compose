@@ -11,4 +11,8 @@
     <select_from_information_schema_requires_grant>true</select_from_information_schema_requires_grant>
     <settings_constraints_replace_previous>true</settings_constraints_replace_previous>
   </access_control_improvements>
+
+  <merge_tree>
+    <replace_long_file_name_to_hash>1</replace_long_file_name_to_hash>
+  </merge_tree>
 </clickhouse>

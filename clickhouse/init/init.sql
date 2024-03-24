@@ -22,3 +22,10 @@ GRANT SELECT ON WOT.Event_OnBattleResult TO public;
 GRANT SELECT ON WOT.Event_OnShot TO public;
 GRANT SELECT ON WOT.description TO public;
 GRANT SELECT ON WOT.TankList TO public;
+
+GRANT SELECT ON WOT.player_coverage_mv TO public;
+GRANT SELECT ON WOT.player_coverage_mv_tankLevel TO public;
+GRANT SELECT ON WOT.player_coverage_mv_tankType TO public;
+GRANT SELECT ON WOT.player_coverage_mv_tankLevel_tankType TO public;
+GRANT SELECT ON WOT.accuracy_hit_points_mv TO public;
+GRANT SELECT ON WOT.team_results_mv TO public;

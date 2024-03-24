@@ -1,4 +1,4 @@
-# docker compose down; docker compose up -p loki -f docker-compose-loki-only.yaml --remove-orphans;
+# docker compose down; docker compose -p loki -f docker-compose-loki-only.yaml up --remove-orphans;
 
 # 9002 – loki
 # 9003 – grafana
