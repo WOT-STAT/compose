@@ -53,6 +53,8 @@ services:
     image: ghcr.io/wot-stat/eventsaver:main
     ports:
      - "9000:9000"
+    volumes:
+      - ../wot-src-data:/app/wot-src
     environment:
       - DEBUG=1
       - ASYNC_INSERT=1

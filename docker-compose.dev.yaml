@@ -53,5 +53,7 @@ services:
     logging: *loki-logging-dev
     ports:
      - "8000:9000"
+    volumes:
+      - ../wot-src-data-dev:/app/wot-src
     environment:
       - DEBUG=1
