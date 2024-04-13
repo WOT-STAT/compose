@@ -20,6 +20,7 @@ TO public;
 GRANT SELECT ON WOT.Event_OnBattleStart TO public;
 GRANT SELECT ON WOT.Event_OnBattleResult TO public;
 GRANT SELECT ON WOT.Event_OnShot TO public;
+GRANT SELECT ON WOT.Event_OnLootboxOpen TO public;
 GRANT SELECT ON WOT.description TO public;
 GRANT SELECT ON WOT.TankList TO public;
 

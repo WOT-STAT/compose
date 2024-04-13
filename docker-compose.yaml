@@ -20,6 +20,8 @@ services:
       - ./clickhouse/config/users.d:/etc/clickhouse-server/users.d
       - ./clickhouse/init:/docker-entrypoint-initdb.d
       - ./clickhouse/benchmark:/benchmark
+    networks:
+      - default
     ulimits:
       nproc: 65535
       nofile:
@@ -49,15 +51,20 @@ services:
       - API_LISTEN=0.0.0.0:7171
       - WATCH_INTERVAL=24h
       - FULL_INTERVAL=168h
+    networks:
+      - default
 
   redis:
     container_name: redis
     image: 'redis:alpine'
     restart: always
+    networks:
+      - default
 
   enent-saver:
     container_name: enent-saver
     restart: always
+    user: "1000:1000"
     depends_on:
       - clickhouse
       - redis
@@ -70,6 +77,8 @@ services:
       - REDIS_HOST=redis
       - JWT_SECRET
       - WG_API_KEY
+    networks:
+      - default
 
   loki:
     container_name: loki
@@ -78,6 +87,8 @@ services:
     command: -config.file=/etc/loki/loki-config.yaml
     volumes:
       - ./loki/loki-local.yaml:/etc/loki/loki-config.yaml
+    networks:
+      - default
 
   grafana:
     container_name: grafana
@@ -87,3 +98,11 @@ services:
       - ./grafana/provisioning:/etc/grafana/provisioning/
     environment:
       - GF_SECURITY_ADMIN_PASSWORD
+    networks:
+      - default
+
+networks:
+  default:
+    driver: bridge
+    driver_opts:
+      com.docker.network.driver.mtu: '1450'
