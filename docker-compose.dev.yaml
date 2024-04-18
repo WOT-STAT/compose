@@ -47,13 +47,13 @@ services:
     ports:
       - "8003:3000"
 
-  enent-saver:
-    container_name: enent-saver-dev
+  event-saver:
+    container_name: event-saver-dev
     image: ghcr.io/wot-stat/eventsaver:dev
     logging: *loki-logging-dev
     ports:
      - "8000:9000"
     volumes:
-      - ../wot-src-data-dev:/app/wot-src
+      - ../wot-src-data-dev2:/app/wot-src
     environment:
       - DEBUG=1

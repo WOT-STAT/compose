@@ -47,8 +47,8 @@ services:
     ports:
       - "9003:3000"
 
-  enent-saver:
-    container_name: enent-saver-prod
+  event-saver:
+    container_name: event-saver-prod
     logging: *loki-logging-prod
     image: ghcr.io/wot-stat/eventsaver:main
     ports:

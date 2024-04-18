@@ -23,6 +23,10 @@ GRANT SELECT ON WOT.Event_OnShot TO public;
 GRANT SELECT ON WOT.Event_OnLootboxOpen TO public;
 GRANT SELECT ON WOT.description TO public;
 GRANT SELECT ON WOT.TankList TO public;
+GRANT SELECT ON WOT.Lootboxes TO public;
+GRANT SELECT ON WOT.Arenas TO public;
+GRANT SELECT ON WOT.Customizations TO public;
+GRANT SELECT ON WOT.Artefacts TO public;
 
 GRANT SELECT ON WOT.player_coverage_mv TO public;
 GRANT SELECT ON WOT.player_coverage_mv_tankLevel TO public;

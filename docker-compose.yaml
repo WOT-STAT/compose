@@ -1,6 +1,6 @@
 # docker compose down; docker compose up --remove-orphans;
 
-# 9000 – enent-saver
+# 9000 – event-saver
 # 9001 – clickhouse
 # 9002 – loki
 # 9003 – grafana
@@ -61,8 +61,8 @@ services:
     networks:
       - default
 
-  enent-saver:
-    container_name: enent-saver
+  event-saver:
+    container_name: event-saver
     restart: always
     user: "1000:1000"
     depends_on:
