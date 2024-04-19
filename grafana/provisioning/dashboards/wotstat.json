@@ -51,7 +51,7 @@
             "uid": "loki"
           },
           "editorMode": "code",
-          "expr": "{compose_project=~\"(dev|prod)\", compose_service=~\"(clickhouse|redis|clickhouse-backup|enent-saver|)\"}",
+          "expr": "{compose_project=~\"(dev|prod)\", compose_service=~\"(clickhouse|redis|clickhouse-backup|event-saver|)\"}",
           "queryType": "range",
           "refId": "A"
         }
