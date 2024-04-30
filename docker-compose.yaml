@@ -22,6 +22,7 @@ services:
       - ./clickhouse/benchmark:/benchmark
     networks:
       - default
+      - wotstat-db
     ulimits:
       nproc: 65535
       nofile:
@@ -106,3 +107,5 @@ networks:
     driver: bridge
     driver_opts:
       com.docker.network.driver.mtu: '1450'
+  wotstat-db:
+    driver: bridge
