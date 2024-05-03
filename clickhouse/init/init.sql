@@ -34,3 +34,17 @@ GRANT SELECT ON WOT.player_coverage_mv_tankType TO public;
 GRANT SELECT ON WOT.player_coverage_mv_tankLevel_tankType TO public;
 GRANT SELECT ON WOT.accuracy_hit_points_mv TO public;
 GRANT SELECT ON WOT.team_results_mv TO public;
+GRANT SELECT ON WOT.Event_OnShot_health_damage_mv TO public;
+GRANT SELECT ON WOT.Event_OnShot_safe_damage_count_by_base_mv TO public;
+
+GRANT SELECT ON WOT.lootbox_equipment_mv TO public;
+GRANT SELECT ON WOT.lootbox_crewbook_mv TO public;
+GRANT SELECT ON WOT.lootbox_item_mv TO public;
+GRANT SELECT ON WOT.lootbox_boosters_mv TO public;
+GRANT SELECT ON WOT.lootbox_customizations_mv TO public;
+GRANT SELECT ON WOT.lootbox_premium_mv TO public;
+GRANT SELECT ON WOT.lootbox_free_xp_mv TO public;
+GRANT SELECT ON WOT.lootbox_gold_mv TO public;
+GRANT SELECT ON WOT.lootbox_credits_mv TO public;
+GRANT SELECT ON WOT.lootbox_vehicle_mv TO public;
+GRANT SELECT ON WOT.lootbox_lootbox_mv TO public;
