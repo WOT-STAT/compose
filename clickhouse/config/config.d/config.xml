@@ -1,9 +1,7 @@
 <?xml version="1.0"?>
 
 <clickhouse>
-  <listen_host>::</listen_host>
   <listen_host>0.0.0.0</listen_host>
-  <listen_try>1</listen_try>
 
   <access_control_improvements>
     <select_from_system_db_requires_grant>true</select_from_system_db_requires_grant>
@@ -15,4 +13,8 @@
   <merge_tree>
     <replace_long_file_name_to_hash>1</replace_long_file_name_to_hash>
   </merge_tree>
+
+  <query_cache>
+    <max_entry_size_in_bytes>5242880</max_entry_size_in_bytes> <!-- 5MB -->
+  </query_cache>
 </clickhouse>

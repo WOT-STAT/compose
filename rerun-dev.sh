@@ -1,5 +1,6 @@
 mkdir -p ../wot-src-data-dev;
 chown -R 1000:1000 ../wot-src-data-dev;
+rm ../wot-src-data/.git/index.lock;
 
 docker compose -p dev down;
 docker compose -p dev -f docker-compose.yaml -f docker-compose.dev.yaml pull;
