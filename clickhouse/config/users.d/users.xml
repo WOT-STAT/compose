@@ -11,6 +11,9 @@
   <profiles>
     <default>
       <allow_experimental_object_type>1</allow_experimental_object_type>
+
+      <!-- 7GB -->
+      <max_server_memory_usage>7516192768</max_server_memory_usage>
     </default>
   </profiles>
 </clickhouse>
