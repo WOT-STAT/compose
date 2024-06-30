@@ -17,7 +17,4 @@
   <query_cache>
     <max_entry_size_in_bytes>5242880</max_entry_size_in_bytes> <!-- 5MB -->
   </query_cache>
-
-  <!-- 7GB -->
-  <max_server_memory_usage>7516192768</max_server_memory_usage>
 </clickhouse>
