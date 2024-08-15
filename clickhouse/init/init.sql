@@ -10,11 +10,11 @@ CREATE USER if not exists public IDENTIFIED WITH no_password
     max_query_size = '10M',
     readonly = 2;
 
-CREATE QUOTA if not exists public
+CREATE QUOTA public
   KEYED BY forwarded_ip_address
     FOR RANDOMIZED INTERVAL 1 MINUTE MAX queries = 240, result_rows = 100000, execution_time = 20,
-    FOR RANDOMIZED INTERVAL 1 HOUR MAX queries = 2000, result_rows = '2M', execution_time = 600,
-    FOR RANDOMIZED INTERVAL 1 DAY MAX queries = 5000, result_rows = '10M', execution_time = 2000
+    FOR RANDOMIZED INTERVAL 1 HOUR MAX queries = 3000, result_rows = '5M', execution_time = 600,
+    FOR RANDOMIZED INTERVAL 1 DAY MAX queries = 50000, result_rows = '50M', execution_time = 2000
 TO public;
 
 GRANT SELECT ON WOT.Event_OnBattleStart TO public;
