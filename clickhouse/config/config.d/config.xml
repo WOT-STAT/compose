@@ -15,7 +15,7 @@
   </merge_tree>
 
   <query_cache>
-    <max_entries>8192</max_entries>
+    <max_entries>16384</max_entries>
     <max_entry_size_in_bytes>5242880</max_entry_size_in_bytes> <!-- 5MB -->
   </query_cache>
 
